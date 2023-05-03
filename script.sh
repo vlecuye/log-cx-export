@@ -39,7 +39,7 @@ obj="gs://${GCLOUD_REPORT_BUCKET}"
 # Write a report containing the service name, service URL, service account or user that
 # deployed it, and any explicitly configured service "limits" such as CPU or Memory.
 
-gcloud alpha logging copy ${3} storage.googleapis.com/${4} --location=${5}  --log-filter='logName="projects/'${PROJECT_ID}'/logs/dialogflow-runtime.googleapis.com%2Frequests" AND timestamp>="'${1}'T01:00:00Z" AND timestamp<="'${2}'T23:59:59Z"'
+gcloud alpha logging copy ${3} storage.googleapis.com/${4} --location=${5}  --log-filter='logName="projects/'${PROJECT_ID}'/logs/dialogflow-runtime.googleapis.com%2Frequests" AND timestamp>="'${1}'T00:00:00Z" AND timestamp<="'${2}'T23:59:59Z"'
 #gcloud logging read 'logName="projects/'${PROJECT_ID}'/logs/dialogflow-runtime.googleapis.com%2Frequests" AND timestamp>="'${1}'T00:00:00Z" AND timestamp<="'${1}'T23:59:59Z"' --format=json | jq -cn --stream 'fromstream(1|truncate_stream(inputs))' | gcloud storage cp - $obj/export-$1.json&
 # /dev/stderr is sent to Cloud Logging.
 echo "Job Started, see logs for details!"
